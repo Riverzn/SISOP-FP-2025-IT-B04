@@ -18,17 +18,13 @@
 
 Nama | NRP
 --- | ---
-... | 5027241xxx
-... | 5027241xxx
-... | 5027241xxx
-... | 5027241xxx
+Adiwidya Budi Pratama | 5027241012
+Rayka Dharma Pranandita | 5027241039
+Ni`mah Fauziyyah Atok | 5027241103
+Muhammad Farrel Rafli Al Fasya | 5027241075
 
 ## Deskripsi Soal
-
-> Insert testcase... (contoh dibawah) // hapus line ini
-
-Memahami race condition pada operasi check-then-act. Program membuat 2 thread; tiap thread mencoba mengambil satu-satunya sumber daya yang tersedia dari variabel global stok (nilai awal 1). Jika tanpa mutex, kedua thread bisa lolos pengecekan dan sama-sama mengambil sumber daya, menghasilkan nilai akhir stok menjadi -1.
-
+Buat program yang mengukur waktu eksekusi sebuah child process. Parent process harus mencatat waktu sebelum melakukan fork(), lalu membuat child yang menjalankan tugas sederhana seperti sleep selama N detik, dan setelah child selesai (wait), parent kembali mencatat waktu akhir. Program harus menghitung dan menampilkan selisih waktu tersebut dalam satuan milidetik sebagai durasi eksekusi child process. Tes program ini dengan beberapa nilai sleep yang berbeda untuk memastikan hasilnya akurat.
 ### Catatan
 
 > Insert catatan dari pengerjaan kalian... (contoh dibawah) // hapus line ini
@@ -51,21 +47,28 @@ Struktur repository:
 
 ...
 
-> Insert poin soal...
+> Wait()
 
-**Teori**
+**Teori**     
+Wait() adalah sebuah panggilan sistem (system call) yang digunakan oleh parent process untuk menyinkronkan eksekusinya dengan child process. Secara spesifik, wait() akan menjeda (memblokir) eksekusi parent hingga salah satu dari child process-nya selesai atau diterminasi. Fungsi utamanya adalah untuk memeriksa apakah sebuah tugas yang didelegasikan ke child telah selesai. Seperti yang dijelaskan oleh Bovet & Cesati (2005, h. 129), bahwa "A process may, for instance, create a child process to perform a specific task and then invoke some wait( )-like library function to check whether the child has terminated. If the child has terminated, its termination code will tell the parent process if the task has been carried out successfully."       
 
-...
+Pola penggunaan wait() ini merupakan inti dari cara kerja banyak program fundamental, salah satunya adalah command shell (terminal). Tanenbaum dan Bos (2015) memberikan contoh praktis mengenai siklus ini. Sebuah shell akan membaca perintah, membuat child process melalui fork(), kemudian "To wait for the child to finish, the parent executes a waitpid system call, which just waits until the child terminates (any child if more than one exists)." (Tanenbaum & Bos, 2015, h. 55). Dengan demikian, wait() tidak hanya menjadi alat sinkronisasi, tetapi juga komponen kunci dalam arsitektur eksekusi perintah di sistem operasi modern.     
 
 **Solusi**
+```c
+else {
+        printf("PARENT: Berhasil membuat child process dengan PID: %d.\n", pid);
+        printf("PARENT: Menunggu child process selesai...\n");
 
-...
-
+        // Tunggu hingga child process selesai
+        wait(NULL);
+```
+Pada percabangan untuk parent process, diberlakukan wait hingga child process berhasil diterminasi.
 **Video Menjalankan Program**
 ...
 
 ## Daftar Pustaka
 
-Sitasi 1
-Sitasi 2
+Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.
+Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
 Sitasi 3
