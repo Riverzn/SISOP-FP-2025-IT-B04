@@ -24,15 +24,19 @@ Ni`mah Fauziyyah Atok | 5027241103
 Muhammad Farrel Rafli Al Fasya | 5027241075
 
 ## Deskripsi Soal
-Buat program yang mengukur waktu eksekusi sebuah child process. Parent process harus mencatat waktu sebelum melakukan fork(), lalu membuat child yang menjalankan tugas sederhana seperti sleep selama N detik, dan setelah child selesai (wait), parent kembali mencatat waktu akhir. Program harus menghitung dan menampilkan selisih waktu tersebut dalam satuan milidetik sebagai durasi eksekusi child process. Tes program ini dengan beberapa nilai sleep yang berbeda untuk memastikan hasilnya akurat.
+Buat program yang mengukur waktu eksekusi sebuah child process. Parent process harus mencatat waktu sebelum melakukan fork(), lalu membuat child yang menjalankan tugas sederhana seperti sleep selama N detik, dan setelah child selesai (wait), parent kembali mencatat waktu akhir. Program harus menghitung dan menampilkan selisih waktu tersebut dalam satuan milidetik sebagai durasi eksekusi child process. Tes program ini dengan beberapa nilai sleep yang berbeda untuk memastikan hasilnya akurat.   
+
 ### Catatan
-
-> Insert catatan dari pengerjaan kalian... (contoh dibawah) // hapus line ini
-
 Struktur repository:
+#### README.md  
+Menjelaskan mengenai teori teori dari fungsi dan cara kerja program process timer, meliputi parent-child process, wait(), Time Measurement, sleep() serta argumen baris perintah 'argc' serta validasi input.    
+
+#### ukurwaktu.c
+Merupakan program yang mengukur waktu eksekusi sebuah child process, dimana di dalamnya digunakan fork() untuk membuat child process, melakukan sleep pada child process selama waktu yang diminta user (parent process melakukan wait hingga childnya selesai), dengan hasil akhir program berupa waktu yang dihabiskan oleh ekseskusi child process
 ```
 .
-..
+├── README.md # Penjelasan mengenai teori dari program yang telah ditulis
+└── ukurwaktu.c # Program process timer
 ```
 
 ## Pengerjaan
