@@ -98,9 +98,7 @@ Pada percabangan untuk parent process, diberlakukan wait hingga child process be
 ...
 
 ## Daftar Pustaka
-
-Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.
-Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
-Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.
-Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.
-Sitasi 3
+- Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.
+- Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
+- Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.
+- Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.
