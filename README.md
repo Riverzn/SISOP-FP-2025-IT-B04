@@ -14,7 +14,7 @@
 9. Jika ditemukan indikasi kecurangan dalam bentuk apapun di pengerjaan soal final project, maka nilai dianggap 0.
 10. Pengerjaan soal final project sesuai dengan modul yang telah diajarkan.
 
-## Kelompok x
+## Kelompok B04
 
 Nama | NRP
 --- | ---
@@ -93,8 +93,32 @@ else {
         // Tunggu hingga child process selesai
         wait(NULL);
 ```
-Pada percabangan untuk parent process, diberlakukan wait hingga child process berhasil diterminasi.
+Pada percabangan untuk parent process, diberlakukan wait hingga child process berhasil diterminasi.    
 
+> Time Measurement
+
+Pada Linux terdapat dua jenis utama perhitungan waktu di kernel Linux, yang pertama mencatat waktu dan tanggal saat ini yang digunakan untuk dikembalikan ke program pengguna
+melalui API time(), ftime(), dan gettimeofday(), selanjutnya ada maintining timer, yang digunakan untuk memberi tahu kernel. Penjelasan mengenai gettimeofday() dijelaskan oleh Bovet & Cesati (2005, h. 252) "gettimeofday( ) Returns, in a data structure named timeval, the number of elapsed seconds since
+midnight of January 1, 1970 (UTC) and the number of elapsed microseconds in
+the last second (a second data structure named timezone is not currently used).". 
+
+**Solusi**
+```c
+
+    struct timeval start_time, end_time;
+
+    gettimeofday(&start_time, NULL);
+    printf("PARENT: Waktu mulai dicatat sebelum fork().\n");
+
+    pid_t pid = fork();
+    ...
+    ...
+    else {
+        ...
+        gettimeofday(&end_time, NULL);
+    }
+```
+Digunakan gettimeofday untuk mencatat start time dari sebelum child process hingga child process berhasil di-terminasi
 > Simulasi Kerja Proses dengan sleep()
 
 **Teori**
@@ -138,10 +162,12 @@ Dengan teknik ini, kita dapat menguji struktur parent–child dan mekanisme penj
 
 
 **Video Menjalankan Program**
-...
+https://github.com/user-attachments/assets/28a07e59-6dfd-4920-9d98-320844dc7448
+
+
 
 ## Daftar Pustaka
-- Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.
-- Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
-- Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.
-- Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.
+Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.
+Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.
+Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.
+Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
