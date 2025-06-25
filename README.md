@@ -94,6 +94,49 @@ else {
         wait(NULL);
 ```
 Pada percabangan untuk parent process, diberlakukan wait hingga child process berhasil diterminasi.
+
+> Simulasi Kerja Proses dengan sleep()
+
+**Teori**
+Fungsi sleep() adalah panggilan sistem yang menangguhkan (blok) eksekusi proses selama sejumlah detik yang ditentukan, melepaskan CPU untuk dijalankan oleh proses lain sehingga tidak terjadi busy-waiting pada CPU (Stevens & Rago, 2013, hlm. 127)¹. Selama periode tidur, proses tidak mengonsumsi waktu CPU, melainkan hanya menunggu secara pasif hingga waktu yang ditetapkan habis (Silberschatz, Galvin, & Gagne, 2018, hlm. 67)². Teknik ini sering dipakai untuk mensimulasikan beban kerja ringan atau pengaturan waktu antar proses dalam pengujian, tanpa membebani CPU dengan perhitungan berlebih.
+
+**Solusi**
+```
+pid_t pid = fork();
+
+if (pid < 0) {
+    perror("fork() gagal");
+    exit(EXIT_FAILURE);
+}
+else if (pid == 0) {
+    // Kode ini dijalankan oleh proses CHILD
+    printf("  CHILD: Proses child (PID: %d) mulai bekerja.\n", getpid());
+    printf("  CHILD: Mensimulasikan kerja—akan sleep %d detik.\n", sleep_duration);
+
+    sleep(sleep_duration);
+
+    printf("  CHILD: Selesai sleep, proses child akan keluar.\n");
+    exit(EXIT_SUCCESS);
+}
+else {
+    // Kode ini dijalankan oleh proses PARENT
+    printf("PARENT: Berhasil membuat child process (PID: %d).\n", pid);
+    printf("PARENT: Menunggu child process selesai...\n");
+
+    wait(NULL);  // Menunggu child selesai
+    printf("PARENT: Child process telah selesai.\n");
+}
+```
+#### Penjelasan
+fork() membagi program menjadi dua proses:
+Parent (pid > 0)
+Child (pid == 0)
+Di jalur child, sleep(sleep_duration) menunda exit selama N detik untuk mensimulasikan “kerja”.
+Di jalur parent, wait(NULL) memblok eksekusi hingga child selesai, memastikan sinkronisasi.
+Dengan teknik ini, kita dapat menguji struktur parent–child dan mekanisme penjadwalan tanpa beban CPU yang berat.
+
+
+
 **Video Menjalankan Program**
 ...
 
