@@ -37,15 +37,45 @@ Struktur repository:
 
 ## Pengerjaan
 
-> Insert poin soal...
+> Proses hubungan Parent-Child
 
 **Teori**
-
-...
+Sebuah proses adalah sebuah program yang sedang dieksekusi, lengkap dengan state dan sumber dayanya. Di lingkungan Unix-like, mekanisme utama untuk membuat proses baru adalah system call fork(). fork() menciptakan salinan hampir identik dari proses yang memanggilnya. Proses asli disebut parent process, dan duplikatnya disebut child process. Setelah panggilan fork(), kedua proses ini berjalan secara independen, tetapi melanjutkan eksekusi dari titik yang sama dalam kode. Nilai kembalian dari fork() digunakan untuk membedakan antara parent (mengembalikan PID child) dan child (mengembalikan 0).
 
 **Solusi**
+```
+pid_t pid = fork();
 
-...
+if (pid < 0) {
+    perror("fork() gagal");
+    exit(EXIT_FAILURE);
+}
+
+else if (pid == 0) {
+    // Kode ini dijalankan oleh proses CHILD
+    printf("  CHILD: Proses child (PID: %d) mulai berjalan.\n", getpid());
+    printf("  CHILD: Akan sleep selama %d detik.\n", sleep_duration);
+    
+    sleep(sleep_duration);
+    
+    printf("  CHILD: Selesai sleep, proses child akan keluar.\n");
+    exit(EXIT_SUCCESS);
+}
+else {
+    // Kode ini dijalankan oleh proses PARENT
+    printf("PARENT: Berhasil membuat child process dengan PID: %d.\n", pid);
+    printf("PARENT: Menunggu child process selesai...\n");
+
+    wait(NULL);  // Menunggu child selesai
+```
+#### Penjelasan
+- `pid_t pid = fork();` membuat proses baru. **Jika berhasil**, `fork()` menciptakan salinan proses yang identik.
+- `pid == 0` menunjukkan bahwa **proses ini adalah child**.
+- `pid > 0` → berarti **proses ini adalah parent**, dan `pid` mengandung **PID dari child.**
+- `wait(NULL)`; → dipanggil oleh parent untuk **menunggu child selesai**, memperlihatkan **sinkronisasi** antar proses.
+
+Seperti yang dijelaskan dalam teori : 
+`fork()` adalah mekanisme utama untuk menciptakan hubungan parent-child. Setelah `fork()`, parent dan child memiliki jalur eksekusi independen yang dimisahkan menggunakan `if-else` berdasarkan nilai return `fork()`.
 
 > Wait()
 
@@ -55,7 +85,7 @@ Wait() adalah sebuah panggilan sistem (system call) yang digunakan oleh parent p
 Pola penggunaan wait() ini merupakan inti dari cara kerja banyak program fundamental, salah satunya adalah command shell (terminal). Tanenbaum dan Bos (2015) memberikan contoh praktis mengenai siklus ini. Sebuah shell akan membaca perintah, membuat child process melalui fork(), kemudian "To wait for the child to finish, the parent executes a waitpid system call, which just waits until the child terminates (any child if more than one exists)." (Tanenbaum & Bos, 2015, h. 55). Dengan demikian, wait() tidak hanya menjadi alat sinkronisasi, tetapi juga komponen kunci dalam arsitektur eksekusi perintah di sistem operasi modern.     
 
 **Solusi**
-```c
+```
 else {
         printf("PARENT: Berhasil membuat child process dengan PID: %d.\n", pid);
         printf("PARENT: Menunggu child process selesai...\n");
