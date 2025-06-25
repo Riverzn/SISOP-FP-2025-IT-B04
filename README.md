@@ -39,7 +39,7 @@ Struktur repository:
 
 > Proses hubungan Parent-Child
 
-**Teori**
+**Teori** <br>
 Sebuah proses adalah sebuah program yang sedang dieksekusi, lengkap dengan state dan sumber dayanya. Di lingkungan Unix-like, mekanisme utama untuk membuat proses baru adalah system call fork(). fork() menciptakan salinan hampir identik dari proses yang memanggilnya. Proses asli disebut parent process, dan duplikatnya disebut child process. Setelah panggilan fork(), kedua proses ini berjalan secara independen, tetapi melanjutkan eksekusi dari titik yang sama dalam kode. Nilai kembalian dari fork() digunakan untuk membedakan antara parent (mengembalikan PID child) dan child (mengembalikan 0).
 
 **Solusi**
