@@ -159,7 +159,41 @@ Di jalur child, sleep(sleep_duration) menunda exit selama N detik untuk mensimul
 Di jalur parent, wait(NULL) memblok eksekusi hingga child selesai, memastikan sinkronisasi.
 Dengan teknik ini, kita dapat menguji struktur parent–child dan mekanisme penjadwalan tanpa beban CPU yang berat.
 
+> Argumen Baris Perintah `argc` dan Validasi Input
 
+**Teori**     
+Dalam pemrograman C, interaksi antara pengguna dan program sering dilakukan melalui argumen baris perintah. Fungsi `main()` secara konvensional menerima dua parameter: int argc dan char *argv[], yang masing-masing mewakili jumlah argumen dan array dari string argumen yang diketik pengguna saat menjalankan program.
+
+Validasi terhadap argumen sangat penting untuk menjamin keandalan program, mencegah error akibat input yang salah, dan memastikan bahwa input yang diterima sesuai dengan yang diharapkan.
+"A robust program must verify that its inputs are within expected parameters and handle exceptions or errors appropriately."
+(Silberschatz et al., 2018, p. 98)
+"Programs that take arguments from the command line should always check the number and type of arguments and provide helpful usage messages if they are incorrect."
+(Stevens & Rago, 2013, p. 29)
+"Many command-line utilities in UNIX use argc and argv to parse command-line options. It is crucial to validate these inputs to prevent unintended behavior."
+(Tanenbaum, 2015, p. 264)
+
+Tanpa validasi, jika pengguna memasukkan nilai seperti "abc" atau tidak memasukkan argumen sama sekali, program bisa mengalami crash atau melakukan perilaku tak terduga.     
+
+**Solusi**
+```
+if (argc != 2) {
+    fprintf(stderr, "Penggunaan: %s <durasi_sleep_detik>\n", argv[0]);
+    exit(EXIT_FAILURE);
+}
+
+int sleep_duration = atoi(argv[1]);
+if (sleep_duration <= 0) {
+    fprintf(stderr, "Durasi sleep harus angka positif.\n");
+    exit(EXIT_FAILURE);
+}
+```
+Penjelasan:
+- `argc != 2` → memastikan pengguna memberikan satu argumen tambahan selain nama program.
+- `atoi(argv[1])` → mengubah argumen string menjadi integer.
+- Validasi `sleep_duration <= 0` → mencegah nilai tidak valid seperti nol, negatif, atau input bukan angka.
+
+
+Tanpa validasi ini, program bisa mengalami kesalahan logika atau keluar dengan error runtime, misalnya jika input "abc" diberikan, `atoi` akan menghasilkan 0.
 
 **Video Menjalankan Program**
 https://github.com/user-attachments/assets/28a07e59-6dfd-4920-9d98-320844dc7448
@@ -167,7 +201,7 @@ https://github.com/user-attachments/assets/28a07e59-6dfd-4920-9d98-320844dc7448
 
 
 ## Daftar Pustaka
-Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.
-Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.
-Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.
+Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.    
+Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.    
+Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.    
 Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
