@@ -10,6 +10,13 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    for (int i = 0; argv[1][i] != '\0'; i++) {
+        if (argv[1][i] < '0' || argv[1][i] > '9') {
+            fprintf(stderr, "Input harus berupa angka bulat positif saja.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
     int sleep_duration = atoi(argv[1]);
     if (sleep_duration <= 0) {
         fprintf(stderr, "Durasi sleep harus angka positif.\n");
