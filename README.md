@@ -126,9 +126,9 @@ Digunakan gettimeofday untuk mencatat start time dari sebelum child process hing
 > Simulasi Kerja Proses dengan sleep()
 
 **Teori**
-Fungsi sleep() adalah panggilan sistem yang menangguhkan (blok) eksekusi proses selama sejumlah detik yang ditentukan, melepaskan CPU untuk dijalankan oleh proses lain sehingga tidak terjadi busy-waiting pada CPU (Stevens & Rago, 2013, hlm. 127)¹ DOI: 10.1145/321738.321744. Selama periode tidur, proses tidak mengonsumsi waktu CPU, melainkan hanya menunggu secara pasif hingga waktu yang ditetapkan habis (Silberschatz, Galvin, & Gagne, 2018, hlm. 67)². Teknik ini sering dipakai untuk mensimulasikan beban kerja ringan atau pengaturan waktu antar proses dalam pengujian, tanpa membebani CPU dengan perhitungan berlebih.
+Fungsi sleep() adalah panggilan sistem yang menangguhkan (blok) eksekusi proses selama sejumlah detik yang ditentukan, melepaskan CPU untuk dijalankan oleh proses lain sehingga tidak terjadi busy-waiting pada CPU (Stevens & Rago, 2013, hlm. 127)¹. Selama periode tidur, proses tidak mengonsumsi waktu CPU, melainkan hanya menunggu secara pasif hingga waktu yang ditetapkan habis (Silberschatz, Galvin, & Gagne, 2018, hlm. 67)². Teknik ini sering dipakai untuk mensimulasikan beban kerja ringan atau pengaturan waktu antar proses dalam pengujian, tanpa membebani CPU dengan perhitungan berlebih.
 
-Panggilan sistem sleep() membuat proses masuk ke state blocked hingga interval waktu yang ditentukan habis, kemudian di‐enqueue kembali oleh scheduler untuk eksekusi—sebuah mekanisme yang lebih efisien dibanding busy‐waiting (Liu & Layland, 1973)¹. Implementasi low‐level sleep() bergantung pada infrastruktur timer kernel, seperti struktur timing wheel yang dioptimalkan untuk manajemen ribuan timer secara efisien (Varghese & Lauck, 1997)² DOI: 10.1145/263867.263885.
+Panggilan sistem sleep() membuat proses masuk ke state blocked hingga interval waktu yang ditentukan habis, kemudian di‐enqueue kembali oleh scheduler untuk eksekusi—sebuah mekanisme yang lebih efisien dibanding busy‐waiting (Liu & Layland, 1973)¹ DOI: 10.1145/321738.321744. Implementasi low‐level sleep() bergantung pada infrastruktur timer kernel, seperti struktur timing wheel yang dioptimalkan untuk manajemen ribuan timer secara efisien (Varghese & Lauck, 1997)² DOI: 10.1145/263867.263885.
 
 **Solusi**
 ```
@@ -212,5 +212,4 @@ Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environme
 Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.    
 Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
 Liu, C. L., & Layland, J. W. (1973). Scheduling Algorithms for Multiprogramming in a Hard‐Real‐Time Environment. Journal of the ACM, 20(1), 46–61.
-
 Varghese, G., & Lauck, R. (1997). Hashed and hierarchical timing wheels: data structures for the efficient implementation of a timer facility. ACM Transactions on Computer Systems, 15(1), 36–70. 
