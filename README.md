@@ -104,7 +104,11 @@ Pada percabangan untuk parent process, diberlakukan wait hingga child process be
 > Time Measurement
 
 Pada Linux terdapat dua jenis utama perhitungan waktu di kernel Linux, yang pertama mencatat waktu dan tanggal saat ini yang digunakan untuk dikembalikan ke program pengguna
-melalui API time(), ftime(), dan gettimeofday(), selanjutnya ada maintining timer, yang digunakan untuk memberi tahu kernel. Penjelasan mengenai gettimeofday() dijelaskan oleh Bovet & Cesati (2005, h. 252) "gettimeofday( ) Returns, in a data structure named timeval, the number of elapsed seconds since midnight of January 1, 1970 (UTC) and the number of elapsed microseconds in the last second (a second data structure named timezone is not currently used)". 
+melalui API time(), ftime(), dan gettimeofday(), selanjutnya ada maintining timer, yang digunakan untuk memberi tahu kernel. Penjelasan mengenai gettimeofday() dijelaskan oleh Bovet & Cesati (2005, h. 252) "gettimeofday( ) Returns, in a data structure named timeval, the number of elapsed seconds since midnight of January 1, 1970 (UTC) and the number of elapsed microseconds in the last second (a second data structure named timezone is not currently used)".    
+
+Penjelasan tentang bagaimana gettimeofday() digunakan dalam konteks benchmarking sistem juga diulas oleh Beckman et al. (2008). Mereka menyoroti bahwa "the commonly used POSIX gettimeofday() system call is not quite good enough:even if its precision matches its resolution (which is not guaranteed), it will still have a precision of only 1 µs. Besides, as we will show later, on some systems invoking ittakes several microseconds, simply because of the system call overhead"    
+
+Ini menunjukkan bahwa meskipun gettimeofday() populer digunakan dalam pengukuran waktu, ada batasan akurasi dan performa ketika digunakan dalam sistem skala besar atau program yang sangat sensitif terhadap waktu.   
 
 **Solusi**
 ```c
@@ -209,7 +213,8 @@ https://github.com/user-attachments/assets/28a07e59-6dfd-4920-9d98-320844dc7448
 
 
 
-## Daftar Pustaka
+## Daftar Pustaka     
+Beckman, P., Iskra, K., Yoshii, K., Coghlan, S., Nataraj, A., 2008. Benchmarking the effects of operating system interference on extreme-scale parallel machines. Cluster Comput 11, 3–16. https://doi.org/10.1007/s10586-007-0047-2
 Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.    
 Ebad, S. A. (2023). Investigating the Input Validation Vulnerabilities in C Programs. International Journal of Advanced Computer Science and Applications, 14(1), 153–160. https://doi.org/10.14569/IJACSA.2023.0140117   
 Jena, S. (2021). Command Line Arguments. in C Programming (page. 403–414). CRC Press. https://doi.org/10.1201/9781003188254-16      
