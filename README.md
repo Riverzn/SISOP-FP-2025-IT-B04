@@ -217,4 +217,4 @@ Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
 Liu, C. L., & Layland, J. W. (1973). Scheduling Algorithms for Multiprogramming in a Hard‐Real‐Time Environment. Journal of the ACM, 20(1), 46–61.   
 Varghese, G., & Lauck, R. (1997). Hashed and hierarchical timing wheels: data structures for the efficient implementation of a timer facility. ACM Transactions on Computer Systems, 15(1), 36–70.   
 Ebad, S. A. (2023). Investigating the Input Validation Vulnerabilities in C Programs. International Journal of Advanced Computer Science and Applications, 14(1), 153–160. https://doi.org/10.14569/IJACSA.2023.0140117   
-Jena, S. (2021). Command Line Arguments. Dalam C Programming (hlm. 403–414). CRC Press. https://doi.org/10.1201/9781003188254-16
+Jena, S. (2021). Command Line Arguments. in C Programming (page. 403–414). CRC Press. https://doi.org/10.1201/9781003188254-16
