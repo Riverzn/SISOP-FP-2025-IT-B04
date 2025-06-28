@@ -88,6 +88,8 @@ Wait() adalah sebuah panggilan sistem (system call) yang digunakan oleh parent p
 
 Pola penggunaan wait() ini merupakan inti dari cara kerja banyak program fundamental, salah satunya adalah command shell (terminal). Tanenbaum dan Bos (2015) memberikan contoh praktis mengenai siklus ini. Sebuah shell akan membaca perintah, membuat child process melalui fork(), kemudian "To wait for the child to finish, the parent executes a waitpid system call, which just waits until the child terminates (any child if more than one exists)." (Tanenbaum & Bos, 2015, h. 55). Dengan demikian, wait() tidak hanya menjadi alat sinkronisasi, tetapi juga komponen kunci dalam arsitektur eksekusi perintah di sistem operasi modern.     
 
+Dalam konteks eksperimen sistem modern, Zhao, Gong, dan Fonseca (2021, h. 6) juga menyatakan bahwa "The fault handling measurement code makes the parent wait for the child exit before starting the next iteration because tearing down the child virtual memory has non-negligible costs that would add measurement noise". Ini menunjukkan bahwa penggunaan wait() tidak hanya penting untuk sinkronisasi logika program, tetapi juga untuk menjaga keakuratan dalam pengukuran performa proses di tingkat sistem operasi
+
 **Solusi**
 ```
 else {
@@ -102,9 +104,7 @@ Pada percabangan untuk parent process, diberlakukan wait hingga child process be
 > Time Measurement
 
 Pada Linux terdapat dua jenis utama perhitungan waktu di kernel Linux, yang pertama mencatat waktu dan tanggal saat ini yang digunakan untuk dikembalikan ke program pengguna
-melalui API time(), ftime(), dan gettimeofday(), selanjutnya ada maintining timer, yang digunakan untuk memberi tahu kernel. Penjelasan mengenai gettimeofday() dijelaskan oleh Bovet & Cesati (2005, h. 252) "gettimeofday( ) Returns, in a data structure named timeval, the number of elapsed seconds since
-midnight of January 1, 1970 (UTC) and the number of elapsed microseconds in
-the last second (a second data structure named timezone is not currently used).". 
+melalui API time(), ftime(), dan gettimeofday(), selanjutnya ada maintining timer, yang digunakan untuk memberi tahu kernel. Penjelasan mengenai gettimeofday() dijelaskan oleh Bovet & Cesati (2005, h. 252) "gettimeofday( ) Returns, in a data structure named timeval, the number of elapsed seconds since midnight of January 1, 1970 (UTC) and the number of elapsed microseconds in the last second (a second data structure named timezone is not currently used)". 
 
 **Solusi**
 ```c
@@ -211,10 +211,11 @@ https://github.com/user-attachments/assets/28a07e59-6dfd-4920-9d98-320844dc7448
 
 ## Daftar Pustaka
 Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.    
+Ebad, S. A. (2023). Investigating the Input Validation Vulnerabilities in C Programs. International Journal of Advanced Computer Science and Applications, 14(1), 153–160. https://doi.org/10.14569/IJACSA.2023.0140117   
+Jena, S. (2021). Command Line Arguments. in C Programming (page. 403–414). CRC Press. https://doi.org/10.1201/9781003188254-16      
+Liu, C. L., & Layland, J. W. (1973). Scheduling Algorithms for Multiprogramming in a Hard‐Real‐Time Environment. Journal of the ACM, 20(1), 46–61.    
 Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.    
 Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.    
 Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.   
-Liu, C. L., & Layland, J. W. (1973). Scheduling Algorithms for Multiprogramming in a Hard‐Real‐Time Environment. Journal of the ACM, 20(1), 46–61.   
 Varghese, G., & Lauck, R. (1997). Hashed and hierarchical timing wheels: data structures for the efficient implementation of a timer facility. ACM Transactions on Computer Systems, 15(1), 36–70.   
-Ebad, S. A. (2023). Investigating the Input Validation Vulnerabilities in C Programs. International Journal of Advanced Computer Science and Applications, 14(1), 153–160. https://doi.org/10.14569/IJACSA.2023.0140117   
-Jena, S. (2021). Command Line Arguments. in C Programming (page. 403–414). CRC Press. https://doi.org/10.1201/9781003188254-16
+Zhao, K., Gong, S. and Fonseca, P., 2021. On-demand-fork: A microsecond fork for memory-intensive and latency-sensitive applications. In: Proceedings of the Sixteenth European Conference on Computer Systems (EuroSys ’21). Online: ACM. pp.1–16. https://doi.org/10.1145/3447786.3456258
