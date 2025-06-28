@@ -214,7 +214,7 @@ https://github.com/user-attachments/assets/28a07e59-6dfd-4920-9d98-320844dc7448
 
 
 ## Daftar Pustaka     
-Beckman, P., Iskra, K., Yoshii, K., Coghlan, S., Nataraj, A., 2008. Benchmarking the effects of operating system interference on extreme-scale parallel machines. Cluster Comput 11, 3–16. https://doi.org/10.1007/s10586-007-0047-2
+Beckman, P., Iskra, K., Yoshii, K., Coghlan, S., Nataraj, A., 2008. Benchmarking the effects of operating system interference on extreme-scale parallel machines. Cluster Comput 11, 3–16. https://doi.org/10.1007/s10586-007-0047-2     
 Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.    
 Ebad, S. A. (2023). Investigating the Input Validation Vulnerabilities in C Programs. International Journal of Advanced Computer Science and Applications, 14(1), 153–160. https://doi.org/10.14569/IJACSA.2023.0140117   
 Jena, S. (2021). Command Line Arguments. in C Programming (page. 403–414). CRC Press. https://doi.org/10.1201/9781003188254-16      
