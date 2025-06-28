@@ -176,9 +176,12 @@ Validasi terhadap argumen sangat penting untuk menjamin keandalan program, mence
 "Programs that take arguments from the command line should always check the number and type of arguments and provide helpful usage messages if they are incorrect."
 (Stevens & Rago, 2013, p. 29)
 "Many command-line utilities in UNIX use argc and argv to parse command-line options. It is crucial to validate these inputs to prevent unintended behavior."
-(Tanenbaum, 2015, p. 264)
+(Tanenbaum, 2015, p. 264)   
 
-Tanpa validasi, jika pengguna memasukkan nilai seperti "abc" atau tidak memasukkan argumen sama sekali, program bisa mengalami crash atau melakukan perilaku tak terduga.     
+Tanpa validasi, jika pengguna memasukkan nilai seperti "abc" atau tidak memasukkan argumen sama sekali, program bisa mengalami crash atau melakukan perilaku tak terduga. Menurut penelitian oleh Ebad (2023) “Improper validation of command-line inputs can lead to buffer overflows and incorrect logic execution, especially in systems programmed in low-level languages like C.”
+(Ebad, 2023, https://doi.org/10.14569/IJACSA.2023.0140117)   
+Jena (2021) juga menekankan bahwa “Command-line arguments must be parsed and validated carefully to ensure they conform to expected types and ranges, particularly when numeric values are expected.”
+(Jena, 2021, https://doi.org/10.1201/9781003188254-16)
 
 **Solusi**
 ```
@@ -210,6 +213,8 @@ https://github.com/user-attachments/assets/28a07e59-6dfd-4920-9d98-320844dc7448
 Bovet, D. P., & Cesati, M. (2006). Understanding the Linux kernel (3rd ed). O’Reilly.    
 Stevens, W. R., & Rago, S. A. (2013). Advanced Programming in the UNIX Environment (3rd ed.). Addison-Wesley Professional.    
 Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). Wiley.    
-Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.
-Liu, C. L., & Layland, J. W. (1973). Scheduling Algorithms for Multiprogramming in a Hard‐Real‐Time Environment. Journal of the ACM, 20(1), 46–61.
-Varghese, G., & Lauck, R. (1997). Hashed and hierarchical timing wheels: data structures for the efficient implementation of a timer facility. ACM Transactions on Computer Systems, 15(1), 36–70. 
+Tanenbaum, A. S. (2015). Modern operating systems (Fourth edition). Pearson.   
+Liu, C. L., & Layland, J. W. (1973). Scheduling Algorithms for Multiprogramming in a Hard‐Real‐Time Environment. Journal of the ACM, 20(1), 46–61.   
+Varghese, G., & Lauck, R. (1997). Hashed and hierarchical timing wheels: data structures for the efficient implementation of a timer facility. ACM Transactions on Computer Systems, 15(1), 36–70.   
+Ebad, S. A. (2023). Investigating the Input Validation Vulnerabilities in C Programs. International Journal of Advanced Computer Science and Applications, 14(1), 153–160. https://doi.org/10.14569/IJACSA.2023.0140117   
+Jena, S. (2021). Command Line Arguments. Dalam C Programming (hlm. 403–414). CRC Press. https://doi.org/10.1201/9781003188254-16
